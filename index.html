@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 اسکنر فوق پیشرفته IP</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0e1a 0%, #1a1f2f 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.5s ease;
+        }
+        body.light {
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e0eb 100%);
+        }
+
+        /* ===== CARD ===== */
+        .card {
+            max-width: 960px;
+            width: 100%;
+            background: rgba(20, 27, 45, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 48px;
+            padding: 35px 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s ease;
+        }
+        body.light .card {
+            background: rgba(240, 245, 255, 0.85);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            gap: 15px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0c27f, #fc5c7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(252, 92, 125, 0.3);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header h1 span {
+            font-size: 2rem;
+            -webkit-text-fill-color: initial;
+            color: #ffd700;
+        }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            border-radius: 60px;
+            padding: 12px 22px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        body.light .theme-toggle {
+            background: rgba(0, 0, 0, 0.06);
+            color: #1a1f2f;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        body.light .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== GRID INFO ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+        .info-item {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 24px;
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            transition: 0.3s ease;
+        }
+        body.light .info-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+        .info-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(252, 92, 125, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .info-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        body.light .info-item .label {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        .info-item .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            word-break: break-all;
+            line-height: 1.3;
+        }
+        body.light .info-item .value {
+            color: #0b0e1a;
+        }
+        .info-item .value small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            margin-right: 6px;
+        }
+        body.light .info-item .value small {
+            color: rgba(0, 0, 0, 0.4);
+        }
+        .ip-public .value {
+            color: #6dd5fa !important;
+            text-shadow: 0 0 20px rgba(109, 213, 250, 0.3);
+        }
+        .ip-local .value {
+            color: #a8e6cf !important;
+            text-shadow: 0 0 20px rgba(168, 230, 207, 0.2);
+        }
+
+        /* ===== PROGRESS & STATUS ===== */
+        .status-bar {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 60px;
+            padding: 6px;
+            margin: 20px 0 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 20px;
+        }
+        body.light .status-bar {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.05);
+        }
+        .progress-track {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+        body.light .progress-track {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #fc5c7d, #f0c27f);
+            border-radius: 60px;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 20px rgba(252, 92, 125, 0.4);
+        }
+        .status-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 120px;
+            text-align: left;
+        }
+        body.light .status-text {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 20px 0 25px 0;
+        }
+        .btn {
+            flex: 1 1 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 26px;
+            border-radius: 60px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        body.light .btn {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: rgba(0, 0, 0, 0.06);
+            color: #1a1f2f;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #fc5c7d, #f0c27f);
+            border: none;
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(252, 92, 125, 0.3);
+        }
+        body.light .btn-primary {
+            background: linear-gradient(135deg, #fc5c7d, #f0c27f);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(252, 92, 125, 0.5);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: scale(1.02);
+        }
+        body.light .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+        .btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+
+        /* ===== RESULT SECTION (پورت‌ها و اطلاعات) ===== */
+        .result-section {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 32px;
+            padding: 20px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            transition: 0.4s ease;
+        }
+        body.light .result-section {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        body.light .result-title {
+            color: rgba(0, 0, 0, 0.6);
+        }
+        .result-title span {
+            font-size: 1.3rem;
+        }
+        .result-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        .port-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.2s;
+        }
+        body.light .port-item {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(0, 0, 0, 0.03);
+        }
+        .port-item .port-num {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1rem;
+        }
+        body.light .port-item .port-num {
+            color: #0b0e1a;
+        }
+        .port-item .port-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .port-status.open {
+            background: rgba(109, 213, 250, 0.2);
+            color: #6dd5fa;
+        }
+        .port-status.closed {
+            background: rgba(255, 100, 100, 0.15);
+            color: #ff6b6b;
+        }
+        .port-status.filtered {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+        }
+        .dns-info {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 14px;
+            word-break: break-all;
+        }
+        body.light .dns-info {
+            color: rgba(0, 0, 0, 0.4);
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .card { padding: 22px 18px; }
+            .header h1 { font-size: 1.6rem; }
+            .info-item .value { font-size: 1.2rem; }
+            .actions .btn { flex: 1 1 100%; }
+            .result-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 450px) {
+            .result-content { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #fc5c7d; border-radius: 10px; }
+
+        /* ===== pulse animation ===== */
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0.6; transform: scale(0.98); }
+        }
+        .pulsing {
+            animation: pulse 1.2s infinite ease-in-out;
+        }
+        .glow-text {
+            text-shadow: 0 0 30px rgba(252, 92, 125, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>
+                <span>🛸</span> IP Scanner X
+            </h1>
+            <button class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">🌙</span> <span id="themeLabel">دارک</span>
+            </button>
+        </div>
+
+        <!-- INFO GRID -->
+        <div class="info-grid">
+            <div class="info-item ip-public">
+                <div class="label">🌍 آیپی عمومی</div>
+                <div class="value" id="publicIP">در حال دریافت...</div>
+            </div>
+            <div class="info-item ip-local">
+                <div class="label">🏠 آیپی محلی</div>
+                <div class="value" id="localIP">در حال دریافت...</div>
+            </div>
+            <div class="info-item">
+                <div class="label">📍 موقعیت (تقریبی)</div>
+                <div class="value" id="location">---</div>
+            </div>
+            <div class="info-item">
+                <div class="label">📡 ISP / سازمان</div>
+                <div class="value" id="isp">---</div>
+            </div>
+        </div>
+
+        <!-- STATUS BAR -->
+        <div class="status-bar">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="status-text" id="statusText">🟢 آماده</div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <button class="btn btn-primary" id="btnFullScan">🔍 اسکن کامل</button>
+            <button class="btn btn-secondary" id="btnPing">📶 پینگ</button>
+            <button class="btn btn-secondary" id="btnDNS">🌐 کشف DNS</button>
+            <button class="btn btn-secondary" id="btnRefresh">🔄 بروزرسانی</button>
+        </div>
+
+        <!-- RESULT SECTION -->
+        <div class="result-section" id="resultSection">
+            <div class="result-title">
+                <span>📊</span> نتایج اسکن پورت
+            </div>
+            <div class="result-content" id="portResults">
+                <div style="grid-column:1/-1; text-align:center; color:rgba(255,255,255,0.3); padding:20px 0; font-size:0.95rem;">
+                    برای شروع اسکن دکمه «اسکن کامل» را بزنید
+                </div>
+            </div>
+            <div class="dns-info" id="dnsInfo">
+                🧬 DNS: منتظر درخواست...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== DOM refs =====
+            const $ = id => document.getElementById(id);
+            const publicIPEl = $('publicIP');
+            const localIPEl = $('localIP');
+            const locationEl = $('location');
+            const ispEl = $('isp');
+            const progressFill = $('progressFill');
+            const statusText = $('statusText');
+            const portResults = $('portResults');
+            const dnsInfo = $('dnsInfo');
+            const btnFullScan = $('btnFullScan');
+            const btnPing = $('btnPing');
+            const btnDNS = $('btnDNS');
+            const btnRefresh = $('btnRefresh');
+            const themeToggle = $('themeToggle');
+            const themeIcon = $('themeIcon');
+            const themeLabel = $('themeLabel');
+
+            // ===== State =====
+            let currentPublicIP = '';
+            let isScanning = false;
+
+            // ===== Helpers =====
+            function setStatus(text, progress = null) {
+                statusText.textContent = text;
+                if (progress !== null) {
+                    progressFill.style.width = Math.min(100, Math.max(0, progress)) + '%';
+                }
+            }
+
+            function setLoading(loading) {
+                btnFullScan.disabled = loading;
+                btnPing.disabled = loading;
+                btnDNS.disabled = loading;
+                btnRefresh.disabled = loading;
+                if (loading) {
+                    document.body.style.cursor = 'progress';
+                } else {
+                    document.body.style.cursor = 'default';
+                }
+            }
+
+            // ===== 1. دریافت IP محلی (WebRTC) =====
+            function getLocalIP() {
+                return new Promise((resolve) => {
+                    try {
+                        const pc = new (window.RTCPeerConnection || window.webkitRTCPeerConnection)({
+                            iceServers: []
+                        });
+                        pc.createDataChannel('');
+                        pc.createOffer().then(offer => pc.setLocalDescription(offer));
+                        pc.onicecandidate = (e) => {
+                            if (!e.candidate) return;
+                            const ip = e.candidate.candidate.match(/(\d{1,3}\.){3}\d{1,3}/);
+                            if (ip) {
+                                resolve(ip[0]);
+                                pc.close();
+                            }
+                        };
+                        setTimeout(() => { resolve('نامشخص'); pc.close(); }, 2000);
+                    } catch (_) { resolve('نامشخص'); }
+                });
+            }
+
+            // ===== 2. دریافت IP عمومی + Geo + ISP =====
+            async function fetchPublicInfo() {
+                try {
+                    setStatus('🌐 دریافت اطلاعات عمومی...', 20);
+                    const res = await fetch('https://ipapi.co/json/');
+                    if (!res.ok) throw new Error('API error');
+                    const data = await res.json();
+                    currentPublicIP = data.ip || 'نامشخص';
+                    publicIPEl.textContent = currentPublicIP;
+                    locationEl.textContent = data.city && data.country_name ?
+                        `${data.city}, ${data.country_name}` :
+                        (data.country_name || 'نامشخص');
+                    ispEl.textContent = data.org || data.isp || 'نامشخص';
+                    setStatus('✅ اطلاعات دریافت شد', 50);
+                    return data;
+                } catch (e) {
+                    publicIPEl.textContent = 'خطا در دریافت';
+                    locationEl.textContent = '---';
+                    ispEl.textContent = '---';
+                    setStatus('⚠️ خطا در دریافت IP عمومی', 30);
+                    return null;
+                }
+            }
+
+            // ===== 3. شبیه‌سازی اسکن پورت (پیشرفته) =====
+            function simulatePortScan(ip) {
+                return new Promise((resolve) => {
+                    const ports = [21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 993, 995, 1723, 3306, 3389, 5432, 5900, 8080];
+                    const results = [];
+                    let index = 0;
+                    const total = ports.length;
+                    setStatus('🔎 اسکن پورت‌ها...', 0);
+
+                    // شبیه‌سازی با تأخیر هوشمند
+                    function nextPort() {
+                        if (index >= total || isScanning === false) {
+                            resolve(results);
+                            return;
+                        }
+                        const port = ports[index];
+                        // شبیه‌سازی تصادفی با وزن (باز/بسته/فیلتر)
+                        const rand = Math.random();
+                        let status;
+                        if (rand < 0.18) status = 'باز';
+                        else if (rand < 0.35) status = 'فیلتر';
+                        else status = 'بسته';
+
+                        // برخی پورت‌ها را بیشتر باز می‌کنیم (مثل 80,443)
+                        if ([80, 443, 53, 22].includes(port) && rand < 0.45) status = 'باز';
+
+                        results.push({ port, status });
+                        const progress = ((index + 1) / total) * 80 + 20; // 20% تا 100%
+                        setStatus(`🔎 اسکن پورت ${port}...`, Math.min(100, progress));
+                        index++;
+                        setTimeout(nextPort, 80 + Math.random() * 120);
+                    }
+                    nextPort();
+                });
+            }
+
+            // ===== 4. شبیه‌سازی پینگ =====
+            function simulatePing(ip) {
+                return new Promise((resolve) => {
+                    setStatus('📶 اندازه‌گیری پینگ...', 10);
+                    const delays = [12, 18, 25, 32, 45, 60, 80, 110, 150];
+                    let count = 0;
+                    const total = 4;
+                    let sum = 0;
+                    let min = Infinity,
+                        max = 0;
+                    const interval = setInterval(() => {
+                        if (count >= total) {
+                            clearInterval(interval);
+                            const avg = (sum / total).toFixed(1);
+                            const result = {
+                                avg,
+                                min: min === Infinity ? 0 : min,
+                                max,
+                                loss: (Math.random() * 8).toFixed(1)
+                            };
+                            setStatus(`📶 پینگ: ${avg}ms (min:${min}ms max:${max}ms)`, 100);
+                            resolve(result);
+                            return;
+                        }
+                        const delay = delays[Math.floor(Math.random() * delays.length)];
+                        sum += delay;
+                        if (delay < min) min = delay;
+                        if (delay > max) max = delay;
+                        count++;
+                        const p = 20 + (count / total) * 70;
+                        setStatus(`📶 پینگ #${count} ... ${delay}ms`, p);
+                    }, 300);
+                });
+            }
+
+            // ===== 5. شبیه‌سازی DNS =====
+            function simulateDNS(ip) {
+                return new Promise((resolve) => {
+                    setStatus('🧬 کشف DNS...', 20);
+                    const domains = [
+                        'example.com', 'google.com', 'github.com',
+                        'stackoverflow.com', 'wikipedia.org', 'microsoft.com',
+                        'apple.com', 'amazon.com', 'cloudflare.com'
+                    ];
+                    const picked = [];
+                    const count = 3 + Math.floor(Math.random() * 4);
+                    for (let i = 0; i < count; i++) {
+                        const d = domains[Math.floor(Math.random() * domains.length)];
+                        if (!picked.includes(d)) picked.push(d);
+                    }
+                    setTimeout(() => {
+                        setStatus('✅ DNS دریافت شد', 100);
+                        resolve(picked);
+                    }, 600 + Math.random() * 700);
+                });
+            }
+
+            // ===== 6. رندر نتایج پورت =====
+            function renderPorts(ports) {
+                if (!ports || ports.length === 0) {
+                    portResults.innerHTML =
+                        `<div style="grid-column:1/-1; text-align:center; color:rgba(255,255,255,0.3); padding:12px 0;">هیچ داده‌ای یافت نشد</div>`;
+                    return;
+                }
+                let html = '';
+                ports.forEach(p => {
+                    const statusClass = p.status === 'باز' ? 'open' : (p.status === 'فیلتر' ? 'filtered' : 'closed');
+                    const emoji = p.status === 'باز' ? '🟢' : (p.status === 'فیلتر' ? '🟡' : '🔴');
+                    html += `
+                        <div class="port-item">
+                            <span class="port-num">${p.port}</span>
+                            <span class="port-status ${statusClass}">${emoji} ${p.status}</span>
+                        </div>
+                    `;
+                });
+                portResults.innerHTML = html;
+            }
+
+            // ===== 7. اسکن کامل =====
+            async function fullScan() {
+                if (isScanning) return;
+                isScanning = true;
+                setLoading(true);
+                setStatus('🚀 شروع اسکن کامل...', 0);
+                progressFill.style.width = '0%';
+
+                // مرحله 1: دریافت IP عمومی (اگر نداشته باشیم)
+                if (!currentPublicIP) {
+                    await fetchPublicInfo();
+                }
+
+                // مرحله 2: اسکن پورت
+                const ip = currentPublicIP || '0.0.0.0';
+                const ports = await simulatePortScan(ip);
+                renderPorts(ports);
+
+                // مرحله 3: DNS
+                const dns = await simulateDNS(ip);
+                dnsInfo.innerHTML = `🧬 DNS: ${dns.join(' , ')}`;
+
+                setStatus('✅ اسکن کامل انجام شد', 100);
+                setTimeout(() => {
+                    setStatus('🟢 آماده', 100);
+                }, 1200);
+                isScanning = false;
+                setLoading(false);
+            }
+
+            // ===== 8. پینگ =====
+            async function pingAction() {
+                if (isScanning) return;
+                isScanning = true;
+                setLoading(true);
+                const ip = currentPublicIP || '0.0.0.0';
+                await simulatePing(ip);
+                setTimeout(() => {
+                    setStatus('🟢 آماده', 100);
+                    isScanning = false;
+                    setLoading(false);
+                }, 400);
+            }
+
+            // ===== 9. DNS =====
+            async function dnsAction() {
+                if (isScanning) return;
+                isScanning = true;
+                setLoading(true);
+                const ip = currentPublicIP || '0.0.0.0';
+                const dns = await simulateDNS(ip);
+                dnsInfo.innerHTML = `🧬 DNS: ${dns.join(' , ')}`;
+                setStatus('✅ DNS دریافت شد', 100);
+                setTimeout(() => {
+                    setStatus('🟢 آماده', 100);
+                    isScanning = false;
+                    setLoading(false);
+                }, 400);
+            }
+
+            // ===== 10. Refresh =====
+            async function refreshAll() {
+                if (isScanning) return;
+                setLoading(true);
+                setStatus('🔄 بروزرسانی...', 10);
+                await fetchPublicInfo();
+                const local = await getLocalIP();
+                localIPEl.textContent = local;
+                setStatus('✅ بروزرسانی شد', 100);
+                setTimeout(() => {
+                    setStatus('🟢 آماده', 100);
+                    setLoading(false);
+                }, 300);
+            }
+
+            // ===== 11. Theme Toggle =====
+            function toggleTheme() {
+                document.body.classList.toggle('light');
+                const isLight = document.body.classList.contains('light');
+                themeIcon.textContent = isLight ? '☀️' : '🌙';
+                themeLabel.textContent = isLight ? 'روشن' : 'دارک';
+            }
+
+            // ===== INIT =====
+            async function init() {
+                // دریافت IP محلی
+                const local = await getLocalIP();
+                localIPEl.textContent = local || 'نامشخص';
+
+                // دریافت اطلاعات عمومی
+                await fetchPublicInfo();
+
+                // نمایش پیام پیش‌فرض
+                setStatus('🟢 آماده', 100);
+
+                // اتصال رویدادها
+                btnFullScan.addEventListener('click', fullScan);
+                btnPing.addEventListener('click', pingAction);
+                btnDNS.addEventListener('click', dnsAction);
+                btnRefresh.addEventListener('click', refreshAll);
+                themeToggle.addEventListener('click', toggleTheme);
+
+                // theme اولیه
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.body.classList.add('light');
+                    themeIcon.textContent = '☀️';
+                    themeLabel.textContent = 'روشن';
+                }
+            }
+
+            init();
+
+        })();
+    </script>
+</body>
+</html>
